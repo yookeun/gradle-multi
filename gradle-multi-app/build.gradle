@@ -1,0 +1,9 @@
+//=================================================================//
+// gradle-multi-app
+//=================================================================//
+
+dependencies {
+	compile project(':gradle-multi-core')
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	
+}

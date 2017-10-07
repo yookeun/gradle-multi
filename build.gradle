@@ -1,0 +1,53 @@
+//=================================================================//
+// gradle-multi ROOT
+//=================================================================//
+
+
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath('io.spring.gradle:dependency-management-plugin:1.0.0.RELEASE')
+	}
+}
+
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply plugin: 'idea'
+	apply plugin: 'org.springframework.boot'
+	
+	sourceCompatibility = 1.8
+		
+	repositories {
+		mavenLocal()
+		mavenCentral()
+	}
+
+	task initSourceFolders {
+	    sourceSets*.java.srcDirs*.each {
+	        if( !it.exists() ) {
+	            it.mkdirs()
+	        }
+	    }
+	 
+	    sourceSets*.resources.srcDirs*.each {
+	        if( !it.exists() ) {
+	            it.mkdirs()
+	        }
+	    }
+	}
+	
+		
+	dependencies {
+		compileOnly('org.projectlombok:lombok')
+		testCompile("org.springframework.boot:spring-boot-starter-test")
+	}
+	
+}
